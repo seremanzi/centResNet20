@@ -90,9 +90,9 @@ class Resnet20(nn.Module):
         out = out.view(out.size(0), -1) # Flatten the features
 
         feature = out
-        out, _ = self.linear(out) 
-           
-        return out, feature
+        out = self.linear(out) 
+
+        return out
       
     def model_size(self):
         tot_size = 0
