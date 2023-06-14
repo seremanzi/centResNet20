@@ -62,7 +62,7 @@ class Resnet20(nn.Module):
       self.linear = nn.Linear(64*block.expansion, n_classes)
 
 
-      self.apply(_weights_init)
+      #self.apply(_weights_init)
       #self.weights = self.apply(_weights_init)
       self.size = self.model_size()
       print(f"size definito {self.size}")
@@ -105,3 +105,19 @@ class Resnet20(nn.Module):
 
 def resnet20(n_classes=100):
     return Resnet20(n_classes)
+
+
+def weights_init_normal(m):
+    classname = m.__class__.__name__
+    if classname.find('Conv') != -1:
+        torch.nn.init_.normal(m.weight, 0.0, 0.02)
+    elif classname.find('BatchNorm') != -1:
+        torch.nn.init_.normal(m.weight, 1.0, 0.02)
+        torch.nn.init_.constant(m.bias, 0.0)
+    elif classname.find('Linear') != -1:
+        torch.nn.init_.normal(m.weight, 0.0, 0.01)
+        torch.nn.init_.constant(m.bias, 0.0)
+
+
+
+
