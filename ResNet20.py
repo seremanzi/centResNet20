@@ -63,7 +63,7 @@ class Resnet20(nn.Module):
 
 
       self.apply(_weights_init)
-      self.weights = self.apply(_weights_init)
+      #self.weights = self.apply(_weights_init)
       self.size = self.model_size()
       print(f"size definito {self.size}")
 
