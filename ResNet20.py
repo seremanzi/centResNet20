@@ -62,7 +62,15 @@ class Resnet20(nn.Module):
       self.linear = nn.Linear(64*block.expansion, n_classes)
 
 
-      self.apply(_weights_init)
+      self.apply(weights_init_normal)  # Inizializza tutti i moduli con weights_init_normal
+
+    # Inizializza specificamente i moduli Lineari e Conv2d con _weights_init
+      for m in self.modules():
+        if isinstance(m, nn.Linear) or isinstance(m, nn.Conv2d):
+            _weights_init(m)
+
+
+      #self.apply(_weights_init)
       #self.weights = self.apply(_weights_init)
       self.size = self.model_size()
       print(f"size definito {self.size}")
